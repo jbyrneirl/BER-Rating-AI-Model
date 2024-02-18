@@ -1,139 +1,554 @@
-A;CountyName;County;The county in which the dwelling is located. The range of allowed values is shown in Table A1 of Appendix A.
-B;DwellingTypeDescr;Dwelling Type;The type of dwelling, selected from the following range of values: • House • Apartment • Ground-floor apartment • Mid-floor apartment • Top-floor apartment • End of Terrace • Mid-terrace • Semi-detached house • Detached house • Maisonette• Basement apartment
-C;Year_of_Construction;Year of Construction;The year the dwelling was originally constructed. For older dwellings this is likely to be approximate. It does not take account of the construction of extensions to the dwelling at a subsequent date, though any upgrades or extensions will be dealt with when calculating heat loss from the dwelling.
-D;TypeofRating;Ratings Type;There are 3 types of BER Certificate: • “New Dwelling – Provisional BER”: required for a dwelling that is not yet built but is offered for sale “off the plans”. If a dwelling is not offered for sale at this stage then this certificate is not required. This certificate is valid for 2 years from the date of issue or until the dwelling is finished, whichever is shorter. It is based on the architectural drawings and specifications of the proposed dwelling. Once construction is finished a “New Dwelling – Final” certificate is required. • “New Dwelling – Final BER”: required for a newly-built dwelling before it is occupied, regardless of whether the dwelling has a “New Dwelling – Provisional BER”. This certificate is based on data collected in a site survey carried out by a registered BER Assessor as well as drawings & specifications for the completed dwelling. It is valid for 10 years from the date of issue though it becomes invalid if material changes are made to the dwelling during that period. • “Existing Dwelling BER”: required for any existing dwelling that is offered for sale or to let. An existing dwelling is one that has previously been sold or occupied. This is based on data collected in a site survey carried out by a registered BER Assessor. It is valid for 10 years from the date of issue though it becomes invalid if material changes are made to the dwelling during that period.
-E;EnergyRating;Energy Rating Category;The BER scale is divided into categories from G (largest primary energy usage) to an A1 rating (lowest primary energy usage). The full range of categories is described in Table 2 of the Appendix.
-F;BerRating;Energy Rating;The Building Energy Rating of the dwelling, i.e. the total Primary Energy Use for the dwelling expressed in units of kWh/m2/year. A low BER indicates an energy efficient dwelling. It is critical to note that multiple factors including dwelling dimensions, orientation, ventilation, dwelling fabric, water heating, lighting, space heating, heating controls and fuel type influence the building energy rating and must all be considered when determining the actual rating and where potential improvements could be made.
-G;GroundFloorArea(sq m);Ground Floor Area;Any floor separating the dwelling from another heated dwelling, e.g. the floor in a mid-floor apartment that is situated directly over another apartment, is assumed to have no heat loss so it is not included here.
-H;UValueWall;Average Wall U-value;The average U-value of all exposed and semi-exposed walls in the dwelling. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum wall U-value of 0.18 W/m2K though higher values can be expected in older dwellings.
-I;UValueRoof;Average Roof U-value;The average U-value of all exposed and semi-exposed roofs in the dwelling. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum U-value of 0.16 W/m2K for a pitched roof insulated at the joists, though higher values can be expected in older dwellings.
-J;UValueFloor;Average Floor U-value;The average U-value of all exposed and semi-exposed floors in the dwelling. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum floor U-value of 0.18 W/m2K though higher values can be expected in older dwellings.
-K;UValueWindow;Average Window U-value;The average U-value of all windows in the dwelling. The U-value is for the whole window: glazing and frame. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum U-value of 1.4 W/m2K for windows, though this can vary depending on the amount of glazing.
-L;UvalueDoor;Average Door U-value;The average U-value of all doors in the dwelling.
-M;WallArea;Exposed Wall Area;The total area of exposed and semi-exposed walls in the dwelling. Any wall separating the dwelling from another heated dwelling, e.g. the party wall in a semi-detached house, is assumed to have no heat loss so it is not included here.
-N;RoofArea;Exposed Roof Area;The total area of exposed and semi-exposed roofs in the dwelling. The area is measured at the thermal envelope which is where the insulation is located. In a typical Irish house with a pitched roof and insulation laid between (and possibly above) the ceiling joists, the ceiling area is the relevant measurement.
-O;FloorArea;Total Floor Area;The total internal floor area of the dwelling, excluding any unheated areas that are thermally separated from the dwelling. Units: m2. The total area of exposed and semi-exposed floors in the dwelling.
-P;WindowArea;Window Area;The total area of all windows in the dwelling. This is the area of the whole opening: glazing and frame.
-Q;DoorArea;Door Area;The total area of all doors in the dwelling. This is the area of the whole opening including any glazing.
-R;NoStoreys;No. of Storeys;The number of storeys in the dwelling.
-S;CO2Rating;Annual CO2 Emissions;The amount of carbon dioxide emitted by the dwelling per annum expressed in units of kg CO2/ m2/year. As with the BER, multiple factors influence the level of carbon dioxide emissions from a dwelling, and must all be considered when determining where potential improvements could be made.
-T;MainSpaceHeatingFuel;Main SH Fuel;The fuel used by the Main Space Heating system. Fuel data is taken from DEAP manual Table 8.
-U;MainWaterHeatingFuel;Main WH Fuel;The fuel used by the Main Water Heating system. Fuel data is taken from DEAP manual Table 8.
-V;HSMainSystemEfficiency;Main SH Efficiency;For all systems except heat pumps this is the (gross) seasonal efficiency of the main space heating system and can have a value between 0 and 100. For heat pumps it is the seasonal performance factor (SPF) expressed as a percentage and may have a value greater than 100. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b. A high value indicates an efficient system, e.g. new oil/gas boilers are required by Building Regulations to have an efficiency of at least 90%.
-W;MultiDwellingMPRN;MPRN shared with other dwelling;Indicates that the dwelling shares its electricity meter with another dwelling. This could apply to a main dwelling and a smaller adjoining apartment for example.
-X;TGDLEdition;Building Regulations;The edition of the Building Regulations, Part L that applies to the dwelling. This is only relevant to New Dwellings. Options are: • None • 2005 • 2008 • 2011• 2019
-Y;MPCDERValue;MPCDER Value;The Maximum Permitted Carbon Dioxide Emission Rating value. This is the maximum amount of carbon dioxide allowed to be emitted by a new dwelling according to the Building Regulations, Part L. The MPCDER is calculated by DEAP, based on a reference house of the same dimensions as the dwelling being tested. If the CO2 Emissions of the dwelling (see Row G) is greater than the MPCDER value then the dwelling does not comply with Part L. This only applies to New Dwellings built according to the 2005 edition of the Building Regulations, Part L.
-Z;HSEffAdjFactor;Main SH Efficiency Adjustment;This is an adjustment to the efficiency of the main heating system which may be applied depending on the type of heating system and other factors such as heating controls or the type of distribution system. The default value is 1. Alternative values are taken from Table 4c of the DEAP manual.
-AA;HSSupplHeatFraction;Secondary SH Fraction;The fraction of the space heating load that is provided by the secondary space heating system. A secondary space heating system is specified if: • fixed secondary heaters are present, e.g. an open fire, or, • the main heating system is insufficient to heat the dwelling to the temperatures required. If there is no secondary system specified this has a value of zero. Otherwise the value depends on the type of the main space heating system and the type of the secondary space heating system and is taken from DEAP manual Table 7.
-AB;HSSupplSystemEff;Secondary SH Efficiency;The (gross) seasonal efficiency of the secondary space heating system, if one is present. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b may be used. If there is no secondary system then this field will have a value of zero. Otherwise it will have a value between 0 and 100 with a high value indicating an efficient heating system.
-AC;WHMainSystemEff;Main WH Efficiency;The (gross) seasonal efficiency of the main water heating system. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b may be used.
-AD;WHEffAdjFactor;Main WH Efficiency Adjustment;This is an adjustment to the efficiency of the main water heating system which may be applied depending on the type of heating system and other factors such as heating controls or distribution system. The default value is 1. Alternative values are taken from Table 4c of the DEAP manual.
-AE;SupplSHFuel;Secondary SH Fuel;The fuel used by the secondary space heating system, if present (see Column Y). Fuel data is taken from DEAP manual Table 8.
-AF;SupplWHFuel;Secondary WH Fuel;The fuel used by the supplementary water heating system, if one is required. Currently there is only one type of supplementary water heating system recognised in the BER, namely the immersion heater located in the hot water cylinder, so the fuel in question, if specified, is always ‘Electricity’.
-AG;SHRenewableResources;SH Renewables;Do renewable sources meet the main space heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
-AH;WHRenewableResources;WH Renewables;Do renewable sources meet the main water heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
-AI;NoOfChimneys;No. of chimneys;The number of chimneys in the dwelling. A chimney is defined as a vertical duct for combustion gases of diameter 200 mm or more. In DEAP a chimney contributes 40 m3/hour to the ventilation rate of the dwelling.
-AJ;NoOfOpenFlues;No. of open flues.;The number of open flues in the dwelling. An open flue is defined as a vertical duct for combustion gases of diameter less than 200 mm. In addition, a chimney with a restricted airflow – e.g., a chimney with a flexible flue liner, a chimney with a damper, a stove with its outlet flue sealed to the chimney – is considered to be an open flue. In DEAP an open flue contributes 20 m3/hour to the ventilation rate of the dwelling.
-AK;NoOfFansAndVents;No. of fans and vents.;The number of intermittent fans - e.g., automatic extract fans in toilets, the extract fan in a cooker hood – and permanent vents in the dwelling. Only vents with a permanently open area greater than 3500mm2 are counted. Vents which can be closed to less than 3500mm2, e.g. by a sliding mechanism, are not counted. In DEAP an intermittent fan or a permanent vent contributes 10 m3/hour to the ventilation rate of the dwelling.
-AL;NoOfFluelessGasFires;No. fixed flueless gas fires.;The number of fixed flueless gas fires in the dwelling. Portable flueless gas fires are not counted. In DEAP a flueless gas fire contributes 40 m3/hour to the ventilation rate of the dwelling.
-AM;DraftLobby;Draft lobby;Is there a draft lobby? Allowed Values: Yes or No. This specifies if the house has a draft lobby on the main entrance to the dwelling. A draught lobby is an arrangement of two doors that forms an airlock to the dwelling, sized such that a person with a pushchair or similar can close the outer door before opening the inner door. The draft lobby acts as an airlock which reduces the amount of warm air lost from the dwelling when the main entrance door is opened.
-AN;VentilationMethod;Ventilation;The main type of ventilation system used in the house: • Natural ventilation • Positive input ventilation from loft • Positive input ventilation from outside • Whole-house extract ventilation • Balanced whole-house mechanical ventilation, no heat recovery • Balanced whole-house mechanical ventilation with heat recovery • Exhaust air heat pump Natural Ventilation is by far the most common in Irish dwellings though mechanical ventilation, in particular ‘balanced whole-house mechanical ventilation with heat recovery’ is becoming more common.
-AO;FanPowerManuDeclaredValue;Mech. Vent. SFP;The specific fan power of the mechanical ventilation system. If there is no mechanical ventilation system this has a value of 0. If a mechanical ventilation system is present a default value of 2 W/[l/s] is assumed unless an appropriately-certified manufacturer’s declared value is provided.
-AP;HeatExchangerEff;HR Efficiency;The efficiency of the heat recovery unit in a balanced whole-house mechanical ventilation with heat recovery system. If there is no heat recovery unit this has a value of 0. If such a system is present a default value of 66% is assumed unless an appropriately-certified manufacturer’s declared value is provided.
-AQ;StructureType;Wall Structure;The structural make-up of the walls of the house. There are 3 possible values: • Masonry, • Timber or Steel-frame, • Insulated Concrete Form. This information is used to estimate the amount of air leakage through cracks in the walls of the dwelling which is necessary if an air permeability test has not been performed on the dwelling. Air leakage through masonry walls contributes 0.35 ac/h to the ventilation rate whereas timber/steel-frame and ICF walls have an assumed leakage rate of 0.25 ac/h.
-AR;SuspendedWoodenFloor;Susp. Wood Floor;Is there a suspended wooden floor? There are 3 possible values: • No, which means there is a solid floor; • Yes (Sealed), which means there is a suspended timber floor sealed at the edges and between the floorboards. • Yes (Unsealed), which means there is a suspended timber floor which is not sealed at the edges or between the floorboards. This information is used to estimate the amount of air leakage through the floor of the dwelling which is necessary if an air permeability test has not been performed on the dwelling. Air leakage through a solid floor is taken to be zero. A sealed suspended wooden floor has a leakage rate of 0.1 ac/h and an unsealed suspended wooden floor has a leakage rate of 0.2 ac/h.
-AS;PercentageDraughtStripped;Percentage draught-stripping;The percentage of openings (windows, doors and attic-hatches) in the dwelling that have draught-stripping. Any whole number from 0 and 100% is allowed. In New Dwellings a value of 100% is assumed. In Existing Dwellings this number is calculated from survey data. It is assumed that double- or triple-glazed windows are draught-stripped.
-AT;NoOfSidesSheltered;No. Sheltered Sides;The number of sides of the dwelling receiving shelter from nearby obstacles such as neighbouring buildings or trees. Allowed values: 0 – 4. This information is determined by site survey. Obstacles must be sufficiently high, wide and near to the dwelling to be considered to offer shelter to a side of the dwelling.
-AU;PermeabilityTest;Perm. Test;Has an air permeability test been performed on the dwelling? Allowed values: Yes or No. An air permeability test (see Glossary) is used to determine the amount of air leakage through the structure of the dwelling under normal conditions. Most existing dwellings will not have had this test done though it is now a requirement for new dwellings.
-AV;PermeabilityTestResult;Perm. Test Result;The result of the pressurisation test expressed in units of ac/h (see Glossary). If no test has been performed on the dwelling a value of 0 is used. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum value of 0.25 ac/h though higher values can be expected in older dwellings.
-AW;TempAdjustment;Temperature Adjustment;This is an adjustment to the “mean internal temperature during heating hours” used to account for very poor or very good levels of control of the main heating system. For most systems it is zero. For systems with poor control, e.g. an oil boiler & radiators with no room thermostats and no programmer, it has a positive value thereby increasing the internal temperature of the dwelling. This requires more fuel to be used which will increase the BER. A negative temperature adjustment is also possible, e.g. a delayed-start thermostat has a temperature adjustment of -0.15°C, which will reduce fuel use and reduce the BER.
-AX;HeatSystemControlCat;Control Cat.;The controls on the main space heating system are assigned a control category depending on whether they offer poor, good or ideal control. Allowed values: 1 – 3. Control Category Control Level 1 Poor control 2 Good control 3 Ideal control A control category of 1 or 2 will increase the internal temperature in the dwelling. This requires more fuel to be used which will increase the BER. Control Category values are taken from DEAP manual Table 4e.
-AY;HeatSystemResponseCat;Responsiveness Cat.;The Heating System Responsiveness category is a measure of how well the heating distribution system responds to a change of the control input. Allowed values: 1 – 5. Systems which respond quickly, e.g. radiators, have a low responsiveness category. Systems which respond slowly, e.g. underfloor heating where the pipes are embedded in concrete slab, have a high responsiveness category. A low responsiveness category will lead to a better BER.
-AZ;NoCentralHeatingPumps;No. C.H. Pumps;The number of circulating pumps on the central heating system. Allowed values: 0, 1, 2,…
-BA;CHBoilerThermostatControlled;Boiler Stat1;Is the boiler controlled by a room thermostat? Allowed values: Yes or No. This relates to the amount of energy used by the circulating pump(s) on the central heating system. If the boiler is controlled by a room thermostat the pumps will run less and therefore consume less electricity.
-BB;NoOilBoilerHeatingPumps;No. Oil Pumps;The number of oil boiler pumps. Allowed values: 0, 1, 2,… In the absence of an oil boiler this is zero.
-BC;OBBoilerThermostatControlled;Boiler Stat2;Is the boiler controlled by a room thermostat? Allowed values: Yes or No. This relates to the amount of energy used by the oil boiler pump(s). If the boiler is controlled by a room thermostat the pumps will be running less and therefore consume less electricity.
-BD;OBPumpInsideDwelling;Oil Pump In;Is the oil boiler pump inside the dwelling? Allowed values: Yes or no. An oil boiler pump gives out heat when in use and if the pump is inside the dwelling, this heat makes a contribution to the space heat requirement of the dwelling. If the pump is outside the dwelling it does not contribute to the space heating.
-BE;NoGasBoilerHeatingPumps;No. Gas Fans;The number of gas boiler flue fans. Allowed values: 0, 1, 2, …. Some gas boilers have a fan in the flue to increase the throughput of air (going in) and exhaust gases (coming out) which makes the combustion process more efficient. In the absence of data to the contrary it is assumed that a gas boiler has one flue fan. If there is no gas boiler in the dwelling then this field is set to zero.
-BF;WarmAirHeatingSystem;Warm Air;Is there a Warm-air heating system present? Allowed values: Yes or No. A warm-air heating system is one where space heating is provided by warm air delivered to rooms via a system of ducts.
-BG;UndergroundHeating;Underfloor;Is there an underfloor heating system present? Allowed values: Yes or No. This option is no longer used in DEAP.
-BH;GroundFloorUValue;Ground Floor U;The U-value of the ground floor of the dwelling. This value is only stated when there is an underfloor heating system present, otherwise it is zero. This option is no longer used in DEAP.
-BI;DistributionLosses;Distribution Loss;Distribution Loss: the amount of energy lost transferring hot water to the taps. This is calculated by the software from the total floor area of the dwelling. In any system in which hot water is transferred from a central storage vessel to the taps - e.g. water heated by a regular boiler and stored in a hot water cylinder - the hot water will inevitably lose some heat as it travels through the pipes to the taps. Systems in which water is only heated at the point of use - e.g. a system of instantaneous electric under-sink heaters - do not have any distribution losses. For most Irish dwellings the distribution loss has a value between 200 - 500 kWh/year.
-BJ;StorageLosses;Storage Loss;Storage Loss: the amount of energy lost storing hot water. Allowed values: Yes or No. Many HW systems heat water and store it for use at a later time, e.g. the regular-boiler & hot water cylinder system common in Irish dwellings. The hot water cylinder stores the water at a high temperature, typically around 60°C, so it is inevitable that some of this heat will be lost to the cooler surroundings, though the rate of heat loss can be reduced by insulating the cylinder. In DEAP the storage loss depends on the type of hot water store, the volume of the store and the amount and type of insulation. For systems with no storage vessel, e.g. instantaneous combi boilers, storage losses are zero. Depending on the system installed storage losses can range from 0 to several thousand kWh/year.
-BK;ManuLossFactorAvail;Declared Loss;Is the Manufacturer’s Declared Loss Factor available for the HW store? Allowed Values: Yes or No. The declared loss factor of the hot water store may be used if it is known. Otherwise the storage losses must be calculated using the type of hot water store, the volume of the store and the amount and type of insulation.
-BL;SolarHotWaterHeating;SolarHotWaterHeating;Is there a solar hot water heating system? Allowed values: Yes or No. Set to true if there is a solar water heating system specified in the BER assessment.
-BM;ElecImmersionInSummer;Electric Immersion in Summer;Is supplementary electric water heating used in summer? Allowed values: Yes or No. Supplementary electric water heating is specified where the main water heater is incapable of providing water heating without space heating, e.g. in a dwelling with an open fire and back boiler as the main water heating system, it is assumed that the occupant would use the immersion to heat the water in summer rather than light a fire. If set to “Yes” DEAP assumes that 33% of the water heating demand is provided by electricity and that the main water heating system provides the rest.
-BN;CombiBoiler;Combi;This indicates the type of combi boiler present, if any; Allowed values are: • None, • Instantaneous, without keep-hot facility, • Instantaneous, with keep-hot facility controlled by time clock, • Instantaneous, with keep-hot facility not controlled by time clock, • Storage combi boiler: store volume ≥ 55 litres, • Storage combi boiler: store volume < 55 litres. An instantaneous combi boiler is one with a store volume less than 15 litres.
-BO;KeepHotFacility;Keep Hot;This indicates the type of Keep-hot facility present, if any. Allowed values are: • None • keep-hot facility, controlled by time clock • keep-hot facility, not controlled by time clock This is a facility within an instantaneous combination boiler whereby water within the boiler may be kept hot while there is no demand. The water is kept hot either (i) solely by burning fuel, or (ii) by electricity, or (iii) both by burning fuel and by electricity, though not necessarily simultaneously.
-BP;WaterStorageVolume;Water Storage Volume;The volume of the hot water store in litres.
-BQ;DeclaredLossFactor;Loss Factor;The manufacturer’s declared loss factor for the hot water store, if available (see Row BI). Units: kWh/day.
-BR;TempFactorUnadj;Temp Factor;The unadjusted Temperature Factor. This is used to calculate storage losses from the hot water store in the absence of the manufacturer’s declared loss factor. The value depends on the type of water store and for storage combi boilers it also depends upon the volume of the hot water store. Increasing the temperature factor means a larger storage loss. The various possible values are detailed in DEAP manual Table 2.
-BS;TempFactorMultiplier;Temp Factor Mult;The Temperature Factor Multiplier. This is used to account for how heating controls on the main water heating system can affect the storage losses, e.g. a cylinder thermostat is assumed to reduce storage losses by 10% giving a Temperature Factor Multiplier of 0.9. The various possible values are detailed in the notes following DEAP manual Table 2.
-BT;InsulationType;HW Insulation Type;The type of insulation on the hot water store. There are two possible values: • Loose jacket • Factory insulated Factory applied insulation is better than loose (lagging) jacket insulation.
-BU;InsulationThickness;HW Insulation Thickness;The thickness of insulation on the hot water store, in millimetres. The thicker the insulation the smaller the storage losses.
-BV;PrimaryCircuitLoss;Primary Loss;The Primary Circuit Loss. This is the amount of energy lost transferring water from where it is heated to where it is stored, e.g. from a regular boiler to the hot water cylinder. For the regular boiler & cylinder system the primary circuit loss can be reduced by insulating the pipes and installing a cylinder thermostat. For combi boilers the primary circuit is very short and contained within the insulated casing of the boiler so the primary circuit loss is taken to be zero. Values are taken from DEAP manual Table 3 and depend on the type of system installed.
-BW;CombiBoilerAddLoss;Combi Loss;Additional Losses for Combi Boilers. Allowed values: see DEAP manual Table 3a. For a combi boiler an additional loss is included to allow for the draw-off of water until an adequate water temperature is attained at the taps.
-BX;ElecConsumpKeepHot;Keep-Hot Elec.;The amount of electricity consumed by the keep-hot facility of an instantaneous combi boiler (see Row BM). A keep-hot facility controlled by time clock is taken to use 600 kWh/year whereas one without time clock control is assumed to use 900 kWh/year
-BY;ApertureArea;Aperture Area;The Aperture Area of a system of solar water heating collectors, measured in m2. This information is taken from the HARP database or from certified test data, if it is available. Otherwise default values from DEAP manual Table H1 are used.
-BZ;ZeroLossCollectorEff;Zero Loss Coll. Eff.;The Zero-loss Collector Efficiency of a system of solar water heating collectors. It is a number between 0 and 1, and is a measure of the fraction of solar energy incident on the collector that is absorbed. This information is taken from the HARP database or from certified test data, if it is available. Otherwise default values from DEAP manual Table H1 are used.
-CA;CollectorHeatLossCoEff;Coll. Heat Loss;The Collector Heat-loss Coefficient of a system of solar water heating collectors. Some of the energy absorbed by a solar collector will inevitably be lost to the surroundings. The amount of heat lost is quantified by the collector heat-loss coefficient. The higher the value, the more of the collected heat that is lost. This information is taken from the HARP database or from certified test data, if it is available. Otherwise default values from DEAP manual Table H1 are used.
-CB;AnnualSolarRadiation;Solar Radiation;The Annual Solar Radiation incident on 1 m2 of solar collectors. This depends on the orientation and angle of the collectors to the horizontal. The optimal set-up is to have the collectors facing south at an angle of 30° to the horizontal though any orientation between south-east and south-west or any angle between 15° to 45° will be close to the optimum. This data must be taken from DEAP manual Table H2.
-CC;OvershadingFactor;Overshading;The Overshading Factor for a system of solar water heating collectors. The calculation of the performance of a solar hot water system must take account of any obstacles that prevent sunlight from falling on the solar collectors for some or all of the day. The overshading factor fulfils this role. It has one of four values depending on the percentage of the sky blocked by obstacles when viewed from the collectors: Overshading % of sky blocked by obstacles. Overshading factor Heavy > 80% 0.5 Significant > 60% - 80% 0.65 Modest 20% - 60% 0.8 None or very little < 20% 1.0 Ideally the collectors will be situated so that there is as little shading as possible.
-CD;CylinderStat;Cylinder Stat;If the cylinder is heated by a boiler, is there a Cylinder Thermostat? Allowed values: Yes, No, NA. This relates to systems where hot water is provided by a boiler and a solar hot water system. If there is no cylinder thermostat on the hot water cylinder the output of the solar hot water system is reduced by 10%. If the question does not apply the “NA” option (Not Applicable) is chosen.
-CE;SolarStorageVolume;Dedicated Solar Vol;The Dedicated Solar Storage Volume. This is the volume of water in the storage cylinder(s) that is only heated by the solar collectors.
-CF;VolumeOfPreHeatStore;n/a;(this field is not used in DEAP)
-CG;CombinedCylinder;Combined Cylinder;Is the dedicated solar storage in a combined cylinder? Allowed Values: Yes or No. If the cylinder that is heated by the solar collector is also heated by other heat sources, e.g. a regular oil/gas boiler or a solid fuel stove with a back boiler, this is set to “Yes”. If the cylinder is heated only by the solar collector it is set to “No”.
-CH;ElectricityConsumption;Solar pump elec;The electricity consumption of the solar circuit circulation pump. If the pump is solar powered (see next entry) this has a value of zero. Otherwise a default value of 75 kWh/year is assumed.
-CI;SWHPumpSolarPowered;Solar pump power;Is the solar hot water pump solar powered? Allowed Values: Yes or No. A pump is usually installed to maintain the flow of water around the solar circuit. This pump may be solar powered in which case no electricity is required to run it. If it is not solar-powered, however, electricity is required and must be accounted for (see previous row).
-CJ;ChargingBasisHeatConsumed;Charging;Group Heating Scheme: Is charging based on heat consumed? Allowed Values: Yes or No. In a group heating scheme if all houses are charged a flat fee, and no account is taken of how much energy each individual household actually uses, a factor of 0.9 is applied to the efficiency of the group heating system on the assumption that the heating will be overused.
-CK;gsdHSSupplHeatFraction;Group Supp. Frac;Group Heating Scheme: Percentage of heat supplied by the Supplementary system. This is the percentage of the space heating demand provided by the secondary system in a dwelling which is part of a group heating scheme. Currently this has a value of 10%. If there is no secondary system then this quantity has a value of zero.
-CL;gsdHSSupplSystemEff;Group Supp. Eff;Group Heating Scheme: Efficiency of the Supplementary system. The (gross) seasonal efficiency of the secondary space heating system, if one is present. As in dwellings with individual heating systems, a secondary space heating system is specified if: • fixed secondary heaters are present, e.g. an open fire, or, • the main heating system is insufficient to heat the dwelling to the temperatures required. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b. If there is no secondary system then this will have a value of zero.
-CM;DistLossFactor;Group Loss;The energy lost distributing the hot water from the group boiler to the individual dwellings is accounted for by this factor. Values are taken from DEAP manual Table 9.
-CN;CHPUnitHeatFraction;CHP Fraction;Group Scheme: The fraction of heat provided by a CHP unit/recovered from a power station. If there is a CHP unit or Waste Heat is recovered from a power station then this value is taken from operational records. Otherwise it has a value of zero.
-CO;CHPSystemType;CHP Type;The type of CHP system. There are three allowed values: • None • Combined Heat and Power • Waste Heat from Power Stations
-CP;CHPElecEff;CHP Elec Eff;The Electrical efficiency of the CHP unit, taken from certified test data. If there is no CHP unit this is zero.
-CQ;CHPHeatEff;CHP Therm Eff;The Thermal efficiency of the CHP unit, taken from certified test data. If there is no CHP unit this is zero.
-CR;CHPFuelType;CHP Fuel;The fuel used by the CHP unit. Fuel data is taken from DEAP manual Table 8.
-CS;SupplHSFuelTypeID;Group Supp. Fuel;The fuel used by the secondary space heating system, if one is present. Fuel data is taken from DEAP manual Table 8.
-CT;gsdSHRenewableResources;Group SH Renewables;Do renewable sources meet the main space heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
-CU;gsdWHRenewableResources;Group WH Renewables;Do renewable sources meet the main water heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
-CV;SolarHeatFraction;Solar Heat Fraction;The Solar Heating Fraction This is the percentage of the heating demand met by the solar collectors. For a solar hot water installation this should ideally be greater than 45% but less than 60% to avoid overheating and stagnation in the solar water heating system.
-CW;DeliveredLightingEnergy;Estimated lighting energy demand (final consumption);See Appendix 3 of the user manual for detail.
-CX;DeliveredEnergyPumpsFans;Estimated pumps and fans energy demand (final consumption);See Appendix 3 of the user manual for detail.
-CY;DeliveredEnergyMainWater;Estimated main water heating energy demand (final consumption);See Appendix 3 of the user manual for detail.
-CZ;DeliveredEnergyMainSpace;Estimated main space energy demand (final consumption);See Appendix 3 of the user manual for detail.
-DA;PrimaryEnergyLighting;Estimated lighting energy requirement (primary energy);See Appendix 3 of the user manual for detail.
-DB;PrimaryEnergyPumpsFans;Estimated pumps and fans energy requirement (primary energy);See Appendix 3 of the user manual for detail.
-DC;PrimaryEnergyMainWater;Estimated main water heating energy requirement (primary energy);See Appendix 3 of the user manual for detail.
-DD;PrimaryEnergyMainSpace;Estimated main space heating energy requirement (primary energy);See Appendix 3 of the user manual for detail.
-DE;CO2Lighting;Energy related CO2 - Lighting;See Appendix 3 of the user manual for detail.
-DF;CO2PumpsFansEnergy related CO2 - Pumps and fans;See Appendix 3 of the user manual for detail.
-DG;CO2MainWater;Energy related CO2 - Main water heating;See Appendix 3 of the user manual for detail.
-DH;CO2MainSpace;Energy related CO2 - Main space heating;See Appendix 3 of the user manual for detail.
-DI;GroundFloorArea;GroundFloorArea(sq m);Any floor separating the dwelling from another heated dwelling, e.g. the floor in a mid-floor apartment that is situated directly over another apartment, is assumed to have no heat loss so it is not included here.
-DJ;GroundFloorHeight;GroundFloorHeight (sq m);Height of the ground floor in metres. Average height between the ceiling surface of the ground floor and the floor below.
-DK;FirstFloorArea;First floor area (sqm);First floor area in square metres
-DL;FirstFloorHeight;First floor height (sqm);Height of the first floor in metres. Average height between the ceiling surface of the first floor and the ceiling surface of the floor below.
-DM;SecondFloorArea;Second floor area (sqm);Second floor area in square metres
-DN;SecondFloorHeight;Second floor height (sqm);Height of the first second in metres. Average height between the ceiling surface of the second floor and the ceiling surface of the floor below.
-DO;ThirdFloorArea;Third floor area (sqm);Third floor area in square metres
-DP;ThirdFloorHeight;Third floor height (sqm);Height of the third floor in metres. Average height between the ceiling surface of the third floor and the ceiling surface of the floor below.
-DQ;ThermalBridgingFactor;Thermal bridging Y factor;Thermal bridging at junctions as defined in DEAP Appendix K
-DR;ThermalMassCategory;Thermal mass of dwelling;Thermal mass is an indicator of the internal heat capacity of the dwelling.
-DS;PredominantRoofTypeArea;PredominantRoofTypeArea (sq m);Area of the largest (most predominant) roof type in a dwelling
-DT;PredominantRoofType;PredominantRoofType;The type of roof with the largest area in a given dwelling
-DU;LowEnergyLightingPercent;Low energy lighting percentage;Percentage of fixed light fittings or installed bulbs in fixed lighting sockets which are low energy (such as LED, CFL or fluorescent).This option is no longer used in DEAP 4.0.0 or later XMLs
-DV;TotalDeliveredEnergy;Estimated total energy demand (final consumption);See Appendix 3 of the user manual for detail.
-DW;DeliveredEnergySecondarySpace;Estimated secondary space energy demand (final consumption);See Appendix 3 of the user manual for detail.
-DX;DeliveredEnergySupplementaryWater;Estimated secondary water energy demand (final consumption);See Appendix 3 of the user manual for detail.
-DY;LivingAreaPercent;Percentage living area;Area of the living room area divided by total dwelling floor area. The definition of the living room area is given in DEAP manual section one and is assumed to be heated to 21 degrees celcius during heating periods.
-DZ;CO2SecondarySpace;Energy related CO2 - Secondary space heating;See Appendix 3 of the user manual for detail.
-EA;CO2SupplementaryWater;Energy related CO2 - Secondary water heating;See Appendix 3 of the user manual for detail.
-EB;PrimaryEnergySecondarySpace;Estimated secondary space heating energy requirement (primary energy);See Appendix 3 of the user manual for detail.
-EC;PrimaryEnergySupplementaryWater;Estimated secondary water heating energy requirement (primary energy);See Appendix 3 of the user manual for detail.
-ED;HESSchemeUpgrade;Home Energy Savings / Better Energy Homes upgrade;BER published as part of Better Energy Homes grant assisted upgrade project
-EE;RoomInRoofArea;Room in roof area;Room in roof floor area in square metres
-EF;PurposeOfRating;Purpose of Rating;Allowed values: • Grant support • New dwelling for owner occupation • Other• Private letting • Sale• Social housing letting • Unknown • Major renovation
+A
+CountyName
+County
+The county in which the dwelling is located. The range of allowed values is shown in Table A1 of Appendix A.
+B
+DwellingTypeDescr
+Dwelling Type
+The type of dwelling, selected from the following range of values: • House • Apartment • Ground-floor apartment • Mid-floor apartment • Top-floor apartment • End of Terrace • Mid-terrace • Semi-detached house • Detached house • Maisonette
+• Basement apartment
+C
+Year_of_Construction
+Year of Construction
+The year the dwelling was originally constructed. For older dwellings this is likely to be approximate. It does not take account of the construction of extensions to the dwelling at a subsequent date, though any upgrades or extensions will be dealt with when calculating heat loss from the dwelling.
+D
+TypeofRating
+Ratings Type
+There are 3 types of BER Certificate: • “New Dwelling – Provisional BER”: required for a dwelling that is not yet built but is offered for sale “off the plans”. If a dwelling is not offered for sale at this stage then this certificate is not required. This certificate is valid for 2 years from the date of issue or until the dwelling is finished, whichever is shorter. It is based on the architectural drawings and specifications of the proposed dwelling. Once construction is finished a “New Dwelling – Final” certificate is required. • “New Dwelling – Final BER”: required for a newly-built dwelling before it is occupied, regardless of whether the dwelling has a “New Dwelling – Provisional BER”. This certificate is based on data collected in a site survey carried out by a registered BER Assessor as well as drawings & specifications for the completed dwelling. It is valid for 10 years from the date of issue though it becomes invalid if material changes are made to the dwelling during that period. • “Existing Dwelling BER”: required for any existing dwelling that is offered for sale or to let. An existing dwelling is one that has previously been sold or occupied. This is based on data collected in a site survey carried out by a registered BER Assessor. It is valid for 10 years from the date of issue though it becomes invalid if material changes are made to the dwelling during that period.
+E
+EnergyRating
+Energy Rating Category
+The BER scale is divided into categories from G (largest primary energy usage) to an A1 rating (lowest primary energy usage). The full range of categories is described in Table 2 of the Appendix.
+F
+BerRating
+Energy Rating
+The Building Energy Rating of the dwelling, i.e. the total Primary Energy Use for the dwelling expressed in units of kWh/m2/year. A low BER indicates an energy efficient dwelling. It is critical to note that multiple factors including dwelling dimensions, orientation, ventilation, dwelling fabric, water heating, lighting, space heating, heating controls and fuel type influence the building energy rating and must all be considered when determining the actual rating and where potential improvements could be made.
+G
+GroundFloorArea(sq m)
+Ground Floor Area
+Any floor separating the dwelling from another heated dwelling, e.g. the floor in a mid-floor apartment that is situated directly over another apartment, is assumed to have no heat loss so it is not included here.
+H
+UValueWall
+Average Wall U-value
+The average U-value of all exposed and semi-exposed walls in the dwelling. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum wall U-value of 0.18 W/m2K though higher values can be expected in older dwellings.
+I
+UValueRoof
+Average Roof U-value
+The average U-value of all exposed and semi-exposed roofs in the dwelling. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum U-value of 0.16 W/m2K for a pitched roof insulated at the joists, though higher values can be expected in older dwellings.
+J
+UValueFloor
+Average Floor U-value
+The average U-value of all exposed and semi-exposed floors in the dwelling. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum floor U-value of 0.18 W/m2K though higher values can be expected in older dwellings.
+K
+UValueWindow
+Average Window U-value
+The average U-value of all windows in the dwelling. The U-value is for the whole window: glazing and frame. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum U-value of 1.4 W/m2K for windows, though this can vary depending on the amount of glazing.
+L
+UvalueDoor
+Average Door U-value
+The average U-value of all doors in the dwelling.
+M
+WallArea
+Exposed Wall Area
+The total area of exposed and semi-exposed walls in the dwelling. Any wall separating the dwelling from another heated dwelling, e.g. the party wall in a semi-detached house, is assumed to have no heat loss so it is not included here.
+N
+RoofArea
+Exposed Roof Area
+The total area of exposed and semi-exposed roofs in the dwelling. The area is measured at the thermal envelope which is where the insulation is located. In a typical Irish house with a pitched roof and insulation laid between (and possibly above) the ceiling joists, the ceiling area is the relevant measurement.
+O
+FloorArea
+Total Floor Area
+The total internal floor area of the dwelling, excluding any unheated areas that are thermally separated from the dwelling. Units: m2. The total area of exposed and semi-exposed floors in the dwelling.
+P
+WindowArea
+Window Area
+The total area of all windows in the dwelling. This is the area of the whole opening: glazing and frame.
+Q
+DoorArea
+Door Area
+The total area of all doors in the dwelling. This is the area of the whole opening including any glazing.
+R
+NoStoreys
+No. of Storeys
+The number of storeys in the dwelling.
+S
+CO2Rating
+Annual CO2 Emissions
+The amount of carbon dioxide emitted by the dwelling per annum expressed in units of kg CO2/ m2/year. As with the BER, multiple factors influence the level of carbon dioxide emissions from a dwelling, and must all be considered when determining where potential improvements could be made.
+T
+MainSpaceHeatingFuel
+Main SH Fuel
+The fuel used by the Main Space Heating system. Fuel data is taken from DEAP manual Table 8.
+U
+MainWaterHeatingFuel
+Main WH Fuel
+The fuel used by the Main Water Heating system. Fuel data is taken from DEAP manual Table 8.
+V
+HSMainSystemEfficiency
+Main SH Efficiency
+For all systems except heat pumps this is the (gross) seasonal efficiency of the main space heating system and can have a value between 0 and 100. For heat pumps it is the seasonal performance factor (SPF) expressed as a percentage and may have a value greater than 100. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b. A high value indicates an efficient system, e.g. new oil/gas boilers are required by Building Regulations to have an efficiency of at least 90%.
+W
+MultiDwellingMPRN
+MPRN shared with other dwelling
+Indicates that the dwelling shares its electricity meter with another dwelling. This could apply to a main dwelling and a smaller adjoining apartment for example.
+X
+TGDLEdition
+Building Regulations
+The edition of the Building Regulations, Part L that applies to the dwelling. This is only relevant to New Dwellings. Options are: • None • 2005 • 2008 • 2011
+• 2019
+Y
+MPCDERValue
+MPCDER Value
+The Maximum Permitted Carbon Dioxide Emission Rating value. This is the maximum amount of carbon dioxide allowed to be emitted by a new dwelling according to the Building Regulations, Part L. The MPCDER is calculated by DEAP, based on a reference house of the same dimensions as the dwelling being tested. If the CO2 Emissions of the dwelling (see Row G) is greater than the MPCDER value then the dwelling does not comply with Part L. This only applies to New Dwellings built according to the 2005 edition of the Building Regulations, Part L.
+Z
+HSEffAdjFactor
+Main SH Efficiency Adjustment
+This is an adjustment to the efficiency of the main heating system which may be applied depending on the type of heating system and other factors such as heating controls or the type of distribution system. The default value is 1. Alternative values are taken from Table 4c of the DEAP manual.
+AA
+HSSupplHeatFraction
+Secondary SH Fraction
+The fraction of the space heating load that is provided by the secondary space heating system. A secondary space heating system is specified if: • fixed secondary heaters are present, e.g. an open fire, or, • the main heating system is insufficient to heat the dwelling to the temperatures required. If there is no secondary system specified this has a value of zero. Otherwise the value depends on the type of the main space heating system and the type of the secondary space heating system and is taken from DEAP manual Table 7.
+AB
+HSSupplSystemEff
+Secondary SH Efficiency
+The (gross) seasonal efficiency of the secondary space heating system, if one is present. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b may be used. If there is no secondary system then this field will have a value of zero. Otherwise it will have a value between 0 and 100 with a high value indicating an efficient heating system.
+AC
+WHMainSystemEff
+Main WH Efficiency
+The (gross) seasonal efficiency of the main water heating system. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b may be used.
+AD
+WHEffAdjFactor
+Main WH Efficiency Adjustment
+This is an adjustment to the efficiency of the main water heating system which may be applied depending on the type of heating system and other factors such as heating controls or distribution system. The default value is 1. Alternative values are taken from Table 4c of the DEAP manual.
+AE
+SupplSHFuel
+Secondary SH Fuel
+The fuel used by the secondary space heating system, if present (see Column Y). Fuel data is taken from DEAP manual Table 8.
+AF
+SupplWHFuel
+Secondary WH Fuel
+The fuel used by the supplementary water heating system, if one is required. Currently there is only one type of supplementary water heating system recognised in the BER, namely the immersion heater located in the hot water cylinder, so the fuel in question, if specified, is always ‘Electricity’.
+AG
+SHRenewableResources
+SH Renewables
+Do renewable sources meet the main space heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
+AH
+WHRenewableResources
+WH Renewables
+Do renewable sources meet the main water heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
+AI
+NoOfChimneys
+No. of chimneys
+The number of chimneys in the dwelling. A chimney is defined as a vertical duct for combustion gases of diameter 200 mm or more. In DEAP a chimney contributes 40 m3/hour to the ventilation rate of the dwelling.
+AJ
+NoOfOpenFlues
+No. of open flues.
+The number of open flues in the dwelling. An open flue is defined as a vertical duct for combustion gases of diameter less than 200 mm. In addition, a chimney with a restricted airflow – e.g., a chimney with a flexible flue liner, a chimney with a damper, a stove with its outlet flue sealed to the chimney – is considered to be an open flue. In DEAP an open flue contributes 20 m3/hour to the ventilation rate of the dwelling.
+AK
+NoOfFansAndVents
+No. of fans and vents.
+The number of intermittent fans - e.g., automatic extract fans in toilets, the extract fan in a cooker hood – and permanent vents in the dwelling. Only vents with a permanently open area greater than 3500mm2 are counted. Vents which can be closed to less than 3500mm2, e.g. by a sliding mechanism, are not counted. In DEAP an intermittent fan or a permanent vent contributes 10 m3/hour to the ventilation rate of the dwelling.
+AL
+NoOfFluelessGasFires
+No. fixed flueless gas fires.
+The number of fixed flueless gas fires in the dwelling. Portable flueless gas fires are not counted. In DEAP a flueless gas fire contributes 40 m3/hour to the ventilation rate of the dwelling.
+AM
+DraftLobby
+Draft lobby
+Is there a draft lobby? Allowed Values: Yes or No. This specifies if the house has a draft lobby on the main entrance to the dwelling. A draught lobby is an arrangement of two doors that forms an airlock to the dwelling, sized such that a person with a pushchair or similar can close the outer door before opening the inner door. The draft lobby acts as an airlock which reduces the amount of warm air lost from the dwelling when the main entrance door is opened.
+AN
+VentilationMethod
+Ventilation
+The main type of ventilation system used in the house: • Natural ventilation • Positive input ventilation from loft • Positive input ventilation from outside • Whole-house extract ventilation • Balanced whole-house mechanical ventilation, no heat recovery • Balanced whole-house mechanical ventilation with heat recovery • Exhaust air heat pump
+Natural Ventilation is by far the most common in Irish dwellings though mechanical ventilation, in particular ‘balanced whole-house mechanical ventilation with heat recovery’ is becoming more common.
+AO
+FanPowerManuDeclaredValue
+Mech. Vent. SFP
+The specific fan power of the mechanical ventilation system. If there is no mechanical ventilation system this has a value of 0. If a mechanical ventilation system is present a default value of 2 W/[l/s] is assumed unless an appropriately-certified manufacturer’s declared value is provided.
+AP
+HeatExchangerEff
+HR Efficiency
+The efficiency of the heat recovery unit in a balanced whole-house mechanical ventilation with heat recovery system. If there is no heat recovery unit this has a value of 0. If such a system is present a default value of 66% is assumed unless an appropriately-certified manufacturer’s declared value is provided.
+AQ
+StructureType
+Wall Structure
+The structural make-up of the walls of the house. There are 3 possible values: • Masonry, • Timber or Steel-frame, • Insulated Concrete Form. This information is used to estimate the amount of air leakage through cracks in the walls of the dwelling which is necessary if an air permeability test has not been performed on the dwelling. Air leakage through masonry walls contributes 0.35 ac/h to the ventilation rate whereas timber/steel-frame and ICF walls have an assumed leakage rate of 0.25 ac/h.
+AR
+SuspendedWoodenFloor
+Susp. Wood Floor
+Is there a suspended wooden floor? There are 3 possible values: • No, which means there is a solid floor; • Yes (Sealed), which means there is a suspended timber floor sealed at the edges and between the floorboards. • Yes (Unsealed), which means there is a suspended timber floor which is not sealed at the edges or between the floorboards. This information is used to estimate the amount of air leakage through the floor of the dwelling which is necessary if an air permeability test has not been performed on the dwelling. Air leakage through a solid floor is taken to be zero. A sealed suspended wooden floor has a leakage rate of 0.1 ac/h and an unsealed suspended wooden floor has a leakage rate of 0.2 ac/h.
+AS
+PercentageDraughtStripped
+Percentage draught-stripping
+The percentage of openings (windows, doors and attic-hatches) in the dwelling that have draught-stripping. Any whole number from 0 and 100% is allowed. In New Dwellings a value of 100% is assumed. In Existing Dwellings this number is calculated from survey data. It is assumed that double- or triple-glazed windows are draught-stripped.
+AT
+NoOfSidesSheltered
+No. Sheltered Sides
+The number of sides of the dwelling receiving shelter from nearby obstacles such as neighbouring buildings or trees. Allowed values: 0 – 4. This information is determined by site survey. Obstacles must be sufficiently high, wide and near to the dwelling to be considered to offer shelter to a side of the dwelling.
+AU
+PermeabilityTest
+Perm. Test
+Has an air permeability test been performed on the dwelling? Allowed values: Yes or No. An air permeability test (see Glossary) is used to determine the amount of air leakage through the structure of the dwelling under normal conditions. Most existing dwellings will not have had this test done though it is now a requirement for new dwellings.
+AV
+PermeabilityTestResult
+Perm. Test Result
+The result of the pressurisation test expressed in units of ac/h (see Glossary). If no test has been performed on the dwelling a value of 0 is used. For the purposes of comparison, the 2019 Building Regulations Part L specifies a maximum value of 0.25 ac/h though higher values can be expected in older dwellings.
+AW
+TempAdjustment
+Temperature Adjustment
+This is an adjustment to the “mean internal temperature during heating hours” used to account for very poor or very good levels of control of the main heating system. For most systems it is zero. For systems with poor control, e.g. an oil boiler & radiators with no room thermostats and no programmer, it has a positive value thereby increasing the internal temperature of the dwelling. This requires more fuel to be used which will increase the BER. A negative temperature adjustment is also possible, e.g. a delayed-start thermostat has a temperature adjustment of -0.15°C, which will reduce fuel use and reduce the BER.
+AX
+HeatSystemControlCat
+Control Cat.
+The controls on the main space heating system are assigned a control category depending on whether they offer poor, good or ideal control. Allowed values: 1 – 3. Control Category Control Level 1 Poor control 2 Good control 3 Ideal control A control category of 1 or 2 will increase the internal temperature in the dwelling. This requires more fuel to be used which will increase the BER. Control Category values are taken from DEAP manual Table 4e.
+AY
+HeatSystemResponseCat
+Responsiveness Cat.
+The Heating System Responsiveness category is a measure of how well the heating distribution system responds to a change of the control input. Allowed values: 1 – 5. Systems which respond quickly, e.g. radiators, have a low responsiveness category. Systems which respond slowly, e.g. underfloor heating where the pipes are embedded in concrete slab, have a high responsiveness category. A low responsiveness category will lead to a better BER.
+AZ
+NoCentralHeatingPumps
+No. C.H. Pumps
+The number of circulating pumps on the central heating system. Allowed values: 0, 1, 2,…
+BA
+CHBoilerThermostatControlled
+Boiler Stat1
+Is the boiler controlled by a room thermostat? Allowed values: Yes or No. This relates to the amount of energy used by the circulating pump(s) on the central heating system. If the boiler is controlled by a room thermostat the pumps will run less and therefore consume less electricity.
+BB
+NoOilBoilerHeatingPumps
+No. Oil Pumps
+The number of oil boiler pumps. Allowed values: 0, 1, 2,… In the absence of an oil boiler this is zero.
+BC
+OBBoilerThermostatControlled
+Boiler Stat2
+Is the boiler controlled by a room thermostat? Allowed values: Yes or No. This relates to the amount of energy used by the oil boiler pump(s). If the boiler is controlled by a room thermostat the pumps will be running less and therefore consume less electricity.
+BD
+OBPumpInsideDwelling
+Oil Pump In
+Is the oil boiler pump inside the dwelling? Allowed values: Yes or no. An oil boiler pump gives out heat when in use and if the pump is inside the dwelling, this heat makes a contribution to the space heat requirement of the dwelling. If the pump is outside the dwelling it does not contribute to the space heating.
+BE
+NoGasBoilerHeatingPumps
+No. Gas Fans
+The number of gas boiler flue fans. Allowed values: 0, 1, 2, …. Some gas boilers have a fan in the flue to increase the throughput of air (going in) and exhaust gases (coming out) which makes the combustion process more efficient. In the absence of data to the contrary it is assumed that a gas boiler has one flue fan. If there is no gas boiler in the dwelling then this field is set to zero.
+BF
+WarmAirHeatingSystem
+Warm Air
+Is there a Warm-air heating system present? Allowed values: Yes or No. A warm-air heating system is one where space heating is provided by warm air delivered to rooms via a system of ducts.
+BG
+UndergroundHeating
+Underfloor
+Is there an underfloor heating system present? Allowed values: Yes or No. This option is no longer used in DEAP.
+BH
+GroundFloorUValue
+Ground Floor U
+The U-value of the ground floor of the dwelling. This value is only stated when there is an underfloor heating system present, otherwise it is zero. This option is no longer used in DEAP.
+BI
+DistributionLosses
+Distribution Loss
+Distribution Loss: the amount of energy lost transferring hot water to the taps. This is calculated by the software from the total floor area of the dwelling. In any system in which hot water is transferred from a central storage vessel to the taps - e.g. water heated by a regular boiler and stored in a hot water cylinder - the hot water will inevitably lose some heat as it travels through the pipes to the taps. Systems in which water is only heated at the point of use - e.g. a system of instantaneous electric under-sink heaters - do not have any distribution losses. For most Irish dwellings the distribution loss has a value between 200 - 500 kWh/year.
+BJ
+StorageLosses
+Storage Loss
+Storage Loss: the amount of energy lost storing hot water. Allowed values: Yes or No. Many HW systems heat water and store it for use at a later time, e.g. the regular-boiler & hot water cylinder system common in Irish dwellings. The hot water cylinder stores the water at a high temperature, typically around 60°C, so it is inevitable that some of this heat will be lost to the cooler surroundings, though the rate of heat loss can be reduced by insulating the cylinder. In DEAP the storage loss depends on the type of hot water store, the volume of the store and the amount and type of insulation. For systems with no storage vessel, e.g. instantaneous combi boilers, storage losses are zero. Depending on the system installed storage losses can range from 0 to several thousand kWh/year.
+BK
+ManuLossFactorAvail
+Declared Loss
+Is the Manufacturer’s Declared Loss Factor available for the HW store? Allowed Values: Yes or No. The declared loss factor of the hot water store may be used if it is known. Otherwise the storage losses must be calculated using the type of hot water store, the volume of the store and the amount and type of insulation.
+BL
+SolarHotWaterHeating
+SolarHotWaterHeating
+Is there a solar hot water heating system? Allowed values: Yes or No. Set to true if there is a solar water heating system specified in the BER assessment.
+BM
+ElecImmersionInSummer
+Electric Immersion in Summer
+Is supplementary electric water heating used in summer? Allowed values: Yes or No. Supplementary electric water heating is specified where the main water heater is incapable of providing water heating without space heating, e.g. in a dwelling with an open fire and back boiler as the main water heating system, it is assumed that the occupant would use the immersion to heat the water in summer rather than light a fire. If set to “Yes” DEAP assumes that 33% of the water heating demand is provided by electricity and that the main water heating system provides the rest.
+BN
+CombiBoiler
+Combi
+This indicates the type of combi boiler present, if any; Allowed values are: • None, • Instantaneous, without keep-hot facility, • Instantaneous, with keep-hot facility controlled by time clock, • Instantaneous, with keep-hot facility not controlled by time clock, • Storage combi boiler: store volume ≥ 55 litres, • Storage combi boiler: store volume < 55 litres. An instantaneous combi boiler is one with a store volume less than 15 litres.
+BO
+KeepHotFacility
+Keep Hot
+This indicates the type of Keep-hot facility present, if any. Allowed values are: • None • keep-hot facility, controlled by time clock • keep-hot facility, not controlled by time clock This is a facility within an instantaneous combination boiler whereby water within the boiler may be kept hot while there is no demand. The water is kept hot either (i) solely by burning fuel, or (ii) by electricity, or (iii) both by burning fuel and by electricity, though not necessarily simultaneously.
+BP
+WaterStorageVolume
+Water Storage Volume
+The volume of the hot water store in litres.
+BQ
+DeclaredLossFactor
+Loss Factor
+The manufacturer’s declared loss factor for the hot water store, if available (see Row BI). Units: kWh/day.
+BR
+TempFactorUnadj
+Temp Factor
+The unadjusted Temperature Factor. This is used to calculate storage losses from the hot water store in the absence of the manufacturer’s declared loss factor. The value depends on the type of water store and for storage combi boilers it also depends upon the volume of the hot water store. Increasing the temperature factor means a larger storage loss. The various possible values are detailed in DEAP manual Table 2.
+BS
+TempFactorMultiplier
+Temp Factor Mult
+The Temperature Factor Multiplier. This is used to account for how heating controls on the main water heating system can affect the storage losses, e.g. a cylinder thermostat is assumed to reduce storage losses by 10% giving a Temperature Factor Multiplier of 0.9. The various possible values are detailed in the notes following DEAP manual Table 2.
+BT
+InsulationType
+HW Insulation Type
+The type of insulation on the hot water store. There are two possible values: • Loose jacket • Factory insulated Factory applied insulation is better than loose (lagging) jacket insulation.
+BU
+InsulationThickness
+HW Insulation Thickness
+The thickness of insulation on the hot water store, in millimetres. The thicker the insulation the smaller the storage losses.
+BV
+PrimaryCircuitLoss
+Primary Loss
+The Primary Circuit Loss. This is the amount of energy lost transferring water from where it is heated to where it is stored, e.g. from a regular boiler to the hot water cylinder. For the regular boiler & cylinder system the primary circuit loss can be reduced by insulating the pipes and installing a cylinder thermostat. For combi boilers the primary circuit is very short and contained within the insulated casing of the boiler so the primary circuit loss is taken to be zero. Values are taken from DEAP manual Table 3 and depend on the type of system installed.
+BW
+CombiBoilerAddLoss
+Combi Loss
+Additional Losses for Combi Boilers. Allowed values: see DEAP manual Table 3a. For a combi boiler an additional loss is included to allow for the draw-off of water until an adequate water temperature is attained at the taps.
+BX
+ElecConsumpKeepHot
+Keep-Hot Elec.
+The amount of electricity consumed by the keep-hot facility of an instantaneous combi boiler (see Row BM). A keep-hot facility controlled by time clock is taken to use 600 kWh/year whereas one without time clock control is assumed to use 900 kWh/year
+BY
+ApertureArea
+Aperture Area
+The Aperture Area of a system of solar water heating collectors, measured in m2. This information is taken from the HARP database or from certified test data, if it is available. Otherwise default values from DEAP manual Table H1 are used.
+BZ
+ZeroLossCollectorEff
+Zero Loss Coll. Eff.
+The Zero-loss Collector Efficiency of a system of solar water heating collectors. It is a number between 0 and 1, and is a measure of the fraction of solar energy incident on the collector that is absorbed. This information is taken from the HARP database or from certified test data, if it is available. Otherwise default values from DEAP manual Table H1 are used.
+CA
+CollectorHeatLossCoEff
+Coll. Heat Loss
+The Collector Heat-loss Coefficient of a system of solar water heating collectors. Some of the energy absorbed by a solar collector will inevitably be lost to the surroundings. The amount of heat lost is quantified by the collector heat-loss coefficient. The higher the value, the more of the collected heat that is lost. This information is taken from the HARP database or from certified test data, if it is available. Otherwise default values from DEAP manual Table H1 are used.
+CB
+AnnualSolarRadiation
+Solar Radiation
+The Annual Solar Radiation incident on 1 m2 of solar collectors. This depends on the orientation and angle of the collectors to the horizontal. The optimal set-up is to have the collectors facing south at an angle of 30° to the horizontal though any orientation between south-east and south-west or any angle between 15° to 45° will be close to the optimum. This data must be taken from DEAP manual Table H2.
+CC
+OvershadingFactor
+Overshading
+The Overshading Factor for a system of solar water heating collectors. The calculation of the performance of a solar hot water system must take account of any obstacles that prevent sunlight from falling on the solar collectors for some or all of the day. The overshading factor fulfils this role. It has one of four values depending on the percentage of the sky blocked by obstacles when viewed from the collectors: Overshading % of sky blocked by obstacles. Overshading factor Heavy > 80% 0.5 Significant > 60% - 80% 0.65 Modest 20% - 60% 0.8 None or very little < 20% 1.0 Ideally the collectors will be situated so that there is as little shading as possible.
+CD
+CylinderStat
+Cylinder Stat
+If the cylinder is heated by a boiler, is there a Cylinder Thermostat? Allowed values: Yes, No, NA. This relates to systems where hot water is provided by a boiler and a solar hot water system. If there is no cylinder thermostat on the hot water cylinder the output of the solar hot water system is reduced by 10%. If the question does not apply the “NA” option (Not Applicable) is chosen.
+CE
+SolarStorageVolume
+Dedicated Solar Vol
+The Dedicated Solar Storage Volume. This is the volume of water in the storage cylinder(s) that is only heated by the solar collectors.
+CF
+VolumeOfPreHeatStore
+n/a
+(this field is not used in DEAP)
+CG
+CombinedCylinder
+Combined Cylinder
+Is the dedicated solar storage in a combined cylinder? Allowed Values: Yes or No. If the cylinder that is heated by the solar collector is also heated by other heat sources, e.g. a regular oil/gas boiler or a solid fuel stove with a back boiler, this is set to “Yes”. If the cylinder is heated only by the solar collector it is set to “No”.
+CH
+ElectricityConsumption
+Solar pump elec
+The electricity consumption of the solar circuit circulation pump. If the pump is solar powered (see next entry) this has a value of zero. Otherwise a default value of 75 kWh/year is assumed.
+CI
+SWHPumpSolarPowered
+Solar pump power
+Is the solar hot water pump solar powered? Allowed Values: Yes or No. A pump is usually installed to maintain the flow of water around the solar circuit. This pump may be solar powered in which case no electricity is required to run it. If it is not solar-powered, however, electricity is required and must be accounted for (see previous row).
+CJ
+ChargingBasisHeatConsumed
+Charging
+Group Heating Scheme: Is charging based on heat consumed? Allowed Values: Yes or No. In a group heating scheme if all houses are charged a flat fee, and no account is taken of how much energy each individual household actually uses, a factor of 0.9 is applied to the efficiency of the group heating system on the assumption that the heating will be overused.
+CK
+gsdHSSupplHeatFraction
+Group Supp. Frac
+Group Heating Scheme: Percentage of heat supplied by the Supplementary system. This is the percentage of the space heating demand provided by the secondary system in a dwelling which is part of a group heating scheme. Currently this has a value of 10%. If there is no secondary system then this quantity has a value of zero.
+CL
+gsdHSSupplSystemEff
+Group Supp. Eff
+Group Heating Scheme: Efficiency of the Supplementary system. The (gross) seasonal efficiency of the secondary space heating system, if one is present. As in dwellings with individual heating systems, a secondary space heating system is specified if: • fixed secondary heaters are present, e.g. an open fire, or, • the main heating system is insufficient to heat the dwelling to the temperatures required. The efficiency may be taken from one of three sources: • the HARP database, • a manufacturer’s value certified by an accredited testing laboratory, or, • a default value from DEAP manual Table 4a/4b. If there is no secondary system then this will have a value of zero.
+CM
+DistLossFactor
+Group Loss
+The energy lost distributing the hot water from the group boiler to the individual dwellings is accounted for by this factor. Values are taken from DEAP manual Table 9.
+CN
+CHPUnitHeatFraction
+CHP Fraction
+Group Scheme: The fraction of heat provided by a CHP unit/recovered from a power station. If there is a CHP unit or Waste Heat is recovered from a power station then this value is taken from operational records. Otherwise it has a value of zero.
+CO
+CHPSystemType
+CHP Type
+The type of CHP system. There are three allowed values: • None • Combined Heat and Power • Waste Heat from Power Stations
+CP
+CHPElecEff
+CHP Elec Eff
+The Electrical efficiency of the CHP unit, taken from certified test data. If there is no CHP unit this is zero.
+CQ
+CHPHeatEff
+CHP Therm Eff
+The Thermal efficiency of the CHP unit, taken from certified test data. If there is no CHP unit this is zero.
+CR
+CHPFuelType
+CHP Fuel
+The fuel used by the CHP unit. Fuel data is taken from DEAP manual Table 8.
+CS
+SupplHSFuelTypeID
+Group Supp. Fuel
+The fuel used by the secondary space heating system, if one is present. Fuel data is taken from DEAP manual Table 8.
+CT
+gsdSHRenewableResources
+Group SH Renewables
+Do renewable sources meet the main space heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
+CU
+gsdWHRenewableResources
+Group WH Renewables
+Do renewable sources meet the main water heating need? Allowed values: • No • Yes – Solar • Yes – Woodchip or Wood Pellet • Yes – Heat Pump • Yes – Other This is used in the MPCDER calculation for houses built according to the Building Regulations Part L, 2005.
+CV
+SolarHeatFraction
+Solar Heat Fraction
+The Solar Heating Fraction This is the percentage of the heating demand met by the solar collectors. For a solar hot water installation this should ideally be greater than 45% but less than 60% to avoid overheating and stagnation in the solar water heating system.
+CW
+DeliveredLightingEnergy
+Estimated lighting energy demand (final consumption)
+See Appendix 3 of the user manual for detail.
+CX
+DeliveredEnergyPumpsFans
+Estimated pumps and fans energy demand (final consumption)
+See Appendix 3 of the user manual for detail.
+CY
+DeliveredEnergyMainWater
+Estimated main water heating energy demand (final consumption)
+See Appendix 3 of the user manual for detail.
+CZ
+DeliveredEnergyMainSpace
+Estimated main space energy demand (final consumption)
+See Appendix 3 of the user manual for detail.
+DA
+PrimaryEnergyLighting
+Estimated lighting energy requirement (primary energy)
+See Appendix 3 of the user manual for detail.
+DB
+PrimaryEnergyPumpsFans
+Estimated pumps and fans energy requirement (primary energy)
+See Appendix 3 of the user manual for detail.
+DC
+PrimaryEnergyMainWater
+Estimated main water heating energy requirement (primary energy)
+See Appendix 3 of the user manual for detail.
+DD
+PrimaryEnergyMainSpace
+Estimated main space heating energy requirement (primary energy)
+See Appendix 3 of the user manual for detail.
+DE
+CO2Lighting
+Energy related CO2 - Lighting
+See Appendix 3 of the user manual for detail.
+DF
+CO2PumpsFans
+Energy related CO2 - Pumps and fans
+See Appendix 3 of the user manual for detail.
+DG
+CO2MainWater
+Energy related CO2 - Main water heating
+See Appendix 3 of the user manual for detail.
+DH
+CO2MainSpace
+Energy related CO2 - Main space heating
+See Appendix 3 of the user manual for detail.
+DI
+GroundFloorArea
+GroundFloorArea(sq m)
+Any floor separating the dwelling from another heated dwelling, e.g. the floor in a mid-floor apartment that is situated directly over another apartment, is assumed to have no heat loss so it is not included here.
+DJ
+GroundFloorHeight
+GroundFloorHeight (sq m)
+Height of the ground floor in metres. Average height between the ceiling surface of the ground floor and the floor below.
+DK
+FirstFloorArea
+First floor area (sqm)
+First floor area in square metres
+DL
+FirstFloorHeight
+First floor height (sqm)
+Height of the first floor in metres. Average height between the ceiling surface of the first floor and the ceiling surface of the floor below.
+DM
+SecondFloorArea
+Second floor area (sqm)
+Second floor area in square metres
+DN
+SecondFloorHeight
+Second floor height (sqm)
+Height of the first second in metres. Average height between the ceiling surface of the second floor and the ceiling surface of the floor below.
+DO
+ThirdFloorArea
+Third floor area (sqm)
+Third floor area in square metres
+DP
+ThirdFloorHeight
+Third floor height (sqm)
+Height of the third floor in metres. Average height between the ceiling surface of the third floor and the ceiling surface of the floor below.
+DQ
+ThermalBridgingFactor
+Thermal bridging Y factor
+Thermal bridging at junctions as defined in DEAP Appendix K
+DR
+ThermalMassCategory
+Thermal mass of dwelling
+Thermal mass is an indicator of the internal heat capacity of the dwelling.
+DS
+PredominantRoofTypeArea
+PredominantRoofTypeArea (sq m)
+Area of the largest (most predominant) roof type in a dwelling
+DT
+PredominantRoofType
+PredominantRoofType
+The type of roof with the largest area in a given dwelling
+DU
+LowEnergyLightingPercent
+Low energy lighting percentage
+Percentage of fixed light fittings or installed bulbs in fixed lighting sockets which are low energy (such as LED, CFL or fluorescent).
+This option is no longer used in DEAP 4.0.0 or later XMLs
+DV
+TotalDeliveredEnergy
+Estimated total energy demand (final consumption)
+See Appendix 3 of the user manual for detail.
+DW
+DeliveredEnergySecondarySpace
+Estimated secondary space energy demand (final consumption)
+See Appendix 3 of the user manual for detail.
+DX
+DeliveredEnergySupplementaryWater
+Estimated secondary water energy demand (final consumption)
+See Appendix 3 of the user manual for detail.
+DY
+LivingAreaPercent
+Percentage living area
+Area of the living room area divided by total dwelling floor area. The definition of the living room area is given in DEAP manual section one and is assumed to be heated to 21 degrees celcius during heating periods.
+DZ
+CO2SecondarySpace
+Energy related CO2 - Secondary space heating
+See Appendix 3 of the user manual for detail.
+EA
+CO2SupplementaryWater
+Energy related CO2 - Secondary water heating
+See Appendix 3 of the user manual for detail.
+EB
+PrimaryEnergySecondarySpace
+Estimated secondary space heating energy requirement (primary energy)
+See Appendix 3 of the user manual for detail.
+EC
+PrimaryEnergySupplementaryWater
+Estimated secondary water heating energy requirement (primary energy)
+See Appendix 3 of the user manual for detail.
+ED
+HESSchemeUpgrade
+Home Energy Savings / Better Energy Homes upgrade
+BER published as part of Better Energy Homes grant assisted upgrade project
+EE
+RoomInRoofArea
+Room in roof area
+Room in roof floor area in square metres
+EF
+PurposeOfRating
+Purpose of Rating
+Allowed values: • Grant support • New dwelling for owner occupation • Other
+• Private letting • Sale
+• Social housing letting • Unknown
+• Major renovation
 EG
 DateOfAssessment
 Date of assessment
@@ -173,11 +588,6 @@ Renewable energy -
 Energy Produced or Saved
 Part L Total Contribution [kWh/y]
 Annual renewable energy produced or saved Part L contribution by renewable energy
-29
-Column
-Spread sheet reference
-Alternative field title
-Description
 EM
 FirstEnerProdConvFactor
 Renewable energy -
@@ -230,11 +640,6 @@ Renewable energy Type. selected from the following range of values:
 Renewable Thermal
 Renewable Electrical
 No Renewable
-30
-Column
-Spread sheet reference
-Alternative field title
-Description
 EU
 SecondEnerProdComment
 Renewable energy -
@@ -280,11 +685,6 @@ Primary energy conversion factor
 Renewable energy -
 Energy Consumed
 Primary energy conversion factor
-31
-Column
-Spread sheet reference
-Alternative field title
-Description
 FC
 SecondEnerConsumedCO2EmissionFactor
 Renewable energy -
@@ -338,11 +738,6 @@ Renewable energy -
 Energy Produced or Saved
 CO2 Emission Factor (kg/kWh)
 Annual renewable energy produced or saved CO2 conversion factor
-32
-Column
-Spread sheet reference
-Alternative field title
-Description
 FK
 ThirdEnerConsumedComment
 Renewable energy consumed description
@@ -387,11 +782,6 @@ FS
 SecondHeatGenPlantEff
 Group heating system 2 efficiency
 Group heating system 2 efficiency
-33
-Column
-Spread sheet reference
-Alternative field title
-Description
 FT
 SecondPercentageHeat
 Group heating system 2 percentage of heat
@@ -432,11 +822,6 @@ GC
 FirstWallArea
 First wall area
 First wall area
-34
-Column
-Spread sheet reference
-Alternative field title
-Description
 GD
 FirstWallUValue
 First wall U Value
@@ -477,11 +862,6 @@ GM
 SecondWallAgeBandId
 Second wall age band id
 Second wall age band id
-35
-Column
-Spread sheet reference
-Alternative field title
-Description
 GN
 SecondWallTypeId
 Second wall type id
@@ -518,11 +898,6 @@ GV
 SA_Code
 Small Area Code
 Small Areas are a relatively recent geographic concept compiled by the National Institute of Regional and Spatial Analysis (NIRSA) on behalf of the Ordnance Survey Ireland (OSi) and in consultation with the CSO. They were designed as the lowest level of geography for the compilation of statistics in line with data protection guidelines and typically contain between 50 and 200 dwellings. A further constraint imposed when creating these new areas, was that they nested within Electoral Division boundaries. Finally, they are generally comprised either of complete townlands or neighbourhoods.
-36
-Column
-Spread sheet reference
-Alternative field title
-Description
 GW
 Prob_smarea_error_0corr
 Probability small area error 0
@@ -553,4 +928,3 @@ HC
 EPC
 Energy Performance Coefficient
 Energy Performance Coefficient
-37
