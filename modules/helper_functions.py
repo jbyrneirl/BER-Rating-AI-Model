@@ -15,4 +15,4 @@ def count_nan_features(df, limit):
   for count in nanCountTotal:
     if count > limitCount:
       nanCountTotalFeatures += 1
-  print(f"No of features with more than {limitCount*100/len(df)}% NaN's:", nanCountTotalFeatures)
+  print(f"No of features with more than {round(limitCount*100/len(df),1)}% NaN's:", nanCountTotalFeatures)
