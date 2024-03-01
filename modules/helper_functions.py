@@ -22,7 +22,12 @@ NO_FEATURES_KEPT = 20
 
 
 def feature_reduction_x(df):
+  #convert to X
   X = df.drop(["BerRating", "EnergyRating"], axis='columns')
+  #X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating', 'CO2MainSpace', 'MPCDERValue'], axis='columns')
+  X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating'], axis='columns')
+  #error - cannot drop last two columns
+
   y1 = df.BerRating
   y2 = df.EnergyRating
 
@@ -34,7 +39,5 @@ def feature_reduction_x(df):
   #print(X.corrwith(y))
 
 
-if __name__ == "__main__":
-  df = pd.read_csv("../data/training/BERRatingData_aa.csv", sep=";", on_bad_lines="skip", low_memory=False)
-  df = feature_reduction(df, 10)
-  print(df.keys())
+def rating_conversion(ber_rating):
+  print(ber_rating.head())
