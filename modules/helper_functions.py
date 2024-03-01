@@ -17,16 +17,14 @@ def count_nan_features(df, limit):
       nanCountTotalFeatures += 1
   print(f"No of features with more than {round(limitCount*100/len(df),1)}% NaN's:", nanCountTotalFeatures)
 
-NO_FEATURES_KEPT = 20
+NO_FEATURES_KEPT = 50
 
 
 
 def feature_reduction_x(df):
   #convert to X
   X = df.drop(["BerRating", "EnergyRating"], axis='columns')
-  #X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating', 'CO2MainSpace', 'MPCDERValue'], axis='columns')
-  X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating'], axis='columns')
-  #error - cannot drop last two columns
+  X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating', 'CO2MainSpace', 'MPCDERValue'], axis='columns')
 
   y1 = df.BerRating
   y2 = df.EnergyRating
@@ -34,9 +32,8 @@ def feature_reduction_x(df):
   X = pd.get_dummies(X)
   values = X.corrwith(y1).abs()
   factors = values.nlargest(NO_FEATURES_KEPT).keys()
-  return df[factors]
 
-  #print(X.corrwith(y))
+  return X[factors]
 
 
 def rating_conversion(ber_rating):
