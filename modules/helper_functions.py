@@ -4,6 +4,8 @@ Helper function for use in notebooks
 """
 import pandas as pd
 import numpy as np
+
+from sklearn.preprocessing import MinMaxScaler
 """_summary_
   df: dataframe
   limit: value between 0 and 1
@@ -31,6 +33,10 @@ def feature_reduction_x(df):
   y2 = df.EnergyRating
 
   X = pd.get_dummies(X)
+
+  scaler = MinMaxScaler()
+  Xnp = scaler.fit_transform(X)
+  X = pd.DataFrame(Xnp, index=X.index, columns=X.columns)
   #print(len(list(X.columns)))
   values = X.corrwith(y1).abs()
   factors = values.nlargest(NO_FEATURES_KEPT).keys()
