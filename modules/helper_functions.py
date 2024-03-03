@@ -18,7 +18,7 @@ def count_nan_features(df, limit):
       nanCountTotalFeatures += 1
   print(f"No of features with more than {round(limitCount*100/len(df),1)}% NaN's:", nanCountTotalFeatures)
 
-NO_FEATURES_KEPT = 50
+NO_FEATURES_KEPT = 100
 
 
 
@@ -31,14 +31,13 @@ def feature_reduction_x(df):
   y2 = df.EnergyRating
 
   X = pd.get_dummies(X)
+  #print(len(list(X.columns)))
   values = X.corrwith(y1).abs()
   factors = values.nlargest(NO_FEATURES_KEPT).keys()
 
   return X[factors]
 
 def rating_feature_conversion(ber_feature_numpy):
-  #print(ber_feature.head())
-  #return ber_feature.apply(rating_conversion).to_numpy()
   rating_conversion_v = np.vectorize(rating_conversion)
   return rating_conversion_v(ber_feature_numpy)
 
