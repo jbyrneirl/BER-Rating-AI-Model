@@ -3,6 +3,7 @@ Helper function for use in notebooks
 
 """
 import pandas as pd
+import numpy as np
 """_summary_
   df: dataframe
   limit: value between 0 and 1
@@ -35,6 +36,49 @@ def feature_reduction_x(df):
 
   return X[factors]
 
+def rating_feature_conversion(ber_feature_numpy):
+  #print(ber_feature.head())
+  #return ber_feature.apply(rating_conversion).to_numpy()
+  rating_conversion_v = np.vectorize(rating_conversion)
+  return rating_conversion_v(ber_feature_numpy)
+
+  
+
+
 
 def rating_conversion(ber_rating):
-  print(ber_rating.head())
+  output = ""
+  if(ber_rating > 450):
+    output = "G"
+  elif(ber_rating > 380):
+    output = "F"
+  elif(ber_rating > 380):
+    output = "F"
+  elif(ber_rating > 340):
+    output = "E2"
+  elif(ber_rating > 300):
+    output = "E1"
+  elif(ber_rating > 260):
+    output = "D2"
+  elif(ber_rating > 225):
+    output = "D1"
+  elif(ber_rating > 200):
+    output = "C3"
+  elif(ber_rating > 175):
+    output = "C2"
+  elif(ber_rating > 150):
+    output = "C1"
+  elif(ber_rating > 125):
+    output = "B3"
+  elif(ber_rating > 100):
+    output = "B2"
+  elif(ber_rating > 75):
+    output = "B1"
+  elif(ber_rating > 50):
+    output = "A3"
+  elif(ber_rating > 25):
+    output = "A2"
+  elif(ber_rating <= 25):
+    output = "A1"
+
+  return output
