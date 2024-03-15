@@ -6,6 +6,12 @@ import pandas as pd
 import numpy as np
 
 from sklearn.preprocessing import MinMaxScaler
+
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_classif
+from sklearn.feature_selection import chi2
+from sklearn.impute import SimpleImputer
+
 """_summary_
   df: dataframe
   limit: value between 0 and 1
@@ -42,6 +48,30 @@ def feature_reduction_x(df):
   factors = values.nlargest(NO_FEATURES_KEPT).keys()
 
   return X[factors]
+
+
+def feature_reduction_x2(df):
+  X = df.drop(["BerRating", "EnergyRating"], axis='columns')
+  X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating', 'CO2MainSpace', 'MPCDERValue'], axis='columns')
+
+  y1 = df.BerRating
+  y2 = df.EnergyRating
+
+  X = pd.get_dummies(X)
+
+  imp = SimpleImputer(missing_values=np.nan, strategy='mean')
+  imp.fit(X)
+  X = imp.transform(X)
+
+  #scaler = MinMaxScaler()
+  #Xnp = scaler.fit_transform(Xt)
+  #X = pd.DataFrame(Xnp, index=X.index, columns=X.columns)
+
+  
+
+  return SelectKBest(f_classif, k=NO_FEATURES_KEPT).fit_transform(X, y2)
+
+
 
 def rating_feature_conversion(ber_feature_numpy):
   rating_conversion_v = np.vectorize(rating_conversion)
