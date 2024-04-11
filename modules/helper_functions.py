@@ -75,7 +75,7 @@ def clean_up_features(df):
   df.columns = df.columns.str.strip().str.replace(" ", "").str.replace("[^\w]", "", regex=True)
   return df
 
-def features_to_drop():
+def features_to_drop(): # DELETE
   """ returns a list of features to drop
   Returns:
       List: list of features to drop
@@ -99,12 +99,9 @@ def features_to_drop():
       'DateOfAssessment', 
       'CO2Rating', 
       'CO2MainSpace', 
-      'MPCDERValue',
-      'FirstEnerConsumedComment',
-      'SecondEnerConsumedComment',
-      'ThirdEnerConsumedComment']
+      'MPCDERValue']
 
-def drop_features(df):
+def drop_features(df): # DELETE
   """Drop features not required/relevant. Not this function drops the features from the original dataframe. For performance reasons, it does not modify a copy of the dataframe
 
   Args:
@@ -113,10 +110,24 @@ def drop_features(df):
   Returns:
       DataFrame: The modified DataFrame
   """
-  df = df.drop(features_to_drop(), axis='columns')
+  features_drop = features_to_drop()
+  for feature in features_drop:
+    if feature in df.columns:
+      df.drop(feature, axis='columns', inplace=True)
 
+  # drop columns which have more than 50% NaN values
+  drop_columns = []
+  nan_count = df.isna().sum()
+
+  # build up list of columns to drop
+  for feature, value in nan_count.items():
+    if feature in df.columns and value/(len(df)) > 0.5:
+      drop_columns.append(feature)
+      df.drop(feature, axis='columns', inplace=True)
+
+  print('drop_features - drop_columns', drop_columns)
   print('drop_features end: ', df.shape)
-
+  print('drop_features end: ', df.columns.values.tolist())
   return df
 
 

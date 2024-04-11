@@ -1,10 +1,11 @@
 import pandas as pd
-from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.base import BaseEstimator, TransformerMixin, OneToOneFeatureMixin 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-class TfidfTransformer(BaseEstimator, TransformerMixin):
-  def __init__(self, tf_idf_vectorizer=None, tf_idf_all_column_names_train_keep=None):
+class TfidfTransformer(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
+  def __init__(self, tf_idf_vectorizer=None, tf_idf_all_column_names_train_keep=None, **kwargs):
+    super().__init__(**kwargs)
     self.tf_idf_vectorizer = tf_idf_vectorizer
     self.tf_idf_all_column_names_train_keep = tf_idf_all_column_names_train_keep
 
@@ -33,15 +34,18 @@ class TfidfTransformer(BaseEstimator, TransformerMixin):
       terms = self.tf_idf_vectorizer.get_feature_names_out()
     
       df_new = pd.DataFrame(tf_idf_matrix.toarray(), columns=terms)
-
       tf_idf_all_column_names_train = df_new.mean().sort_values(ascending=False).keys()
-      tf_idf_columns_to_drop = tf_idf_all_column_names_train[NO_FEATURES_TO_KEEP:]
-      self.tf_idf_all_column_names_train_keep = tf_idf_all_column_names_train[:(NO_FEATURES_TO_KEEP-1)]
 
-      print("train - tf_idf_all_column_names_train_keep:", len(self.tf_idf_all_column_names_train_keep))
+      tf_idf_columns_to_drop = tf_idf_all_column_names_train[NO_FEATURES_TO_KEEP-1:]
+
+      self.tf_idf_all_column_names_train_keep = tf_idf_all_column_names_train[:(NO_FEATURES_TO_KEEP-1)]
+      print('train - features to keep:', self.tf_idf_all_column_names_train_keep)
+
+      print("train - tf_idf_all_column_names_train_keep:", type(self.tf_idf_all_column_names_train_keep), len(self.tf_idf_all_column_names_train_keep))
 
       df_new = df_new.drop(tf_idf_columns_to_drop, axis=1)
       df_new = df_new.add_prefix('Tfidf', axis=1)
+      print('train:', df_new.shape)
 
     else:
       # print('test', df.shape)  
@@ -61,17 +65,19 @@ class TfidfTransformer(BaseEstimator, TransformerMixin):
           df_new[column_name] = 0.0
 
       df_new = df_new.add_prefix('Tfidf', axis=1)
+      print(df_new.columns.values.tolist())
+      print('test -', df_new.shape)
 
     df_new = df_new.astype('float64')
 
     # drop old categorical features from df and replace with df_new
     df_2 = X.drop(categorical_cols, axis=1)
-    df_2.columns = df_2.columns.str.replace(" ", "_").str.replace("[^\w]", "", regex=True)
-    df_2 = df_2.reset_index(drop=True)
+    #df_2.columns = df_2.columns.str.replace(" ", "_").str.replace("[^\w]", "", regex=True)
+    #df_2 = df_2.reset_index(drop=True)
 
     X = pd.concat([df_2, df_new], axis=1) # need to verify that the merging of the columns is correct  
-
-    print('TfIdfTransformer fit end: ', type(X), X.shape)    
+    print('TfIdfTransformer transform end: ', type(X), X.shape)    
+    print('TfIdfTransformer transform end: ', X.head())
 
     return X
 
@@ -104,7 +110,7 @@ class TfidfTransformer(BaseEstimator, TransformerMixin):
       for item in list:
         if isinstance(item, str):
           item = str(item).lower().strip()
-          if item not in stop_words:
+          if item not in stop_words and not item.isalnum():
             output += item + ' '
       return output
 
