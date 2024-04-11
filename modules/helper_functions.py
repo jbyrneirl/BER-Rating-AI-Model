@@ -13,6 +13,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import confusion_matrix
 
+from scipy.special import softmax
+
 """_summary_
 Helper function for use in notebooks
 
@@ -426,8 +428,6 @@ def rating_conversion(ber_rating):
     output = "G"
   elif(ber_rating > 380):
     output = "F"
-  elif(ber_rating > 380):
-    output = "F"
   elif(ber_rating > 340):
     output = "E2"
   elif(ber_rating > 300):
@@ -457,6 +457,14 @@ def rating_conversion(ber_rating):
 
   return output
 
+def softmax(X, y, model):
+  #Need to take the model type, and the data as an input
+  #One=Hot the resulting categories?
+  #Then, need to get probablities of each possible category
+  y_grid = pd.get_dummies(y)
+  model.fit(X , y)
+  print(y_grid.head())
+  return
 
 if __name__=="__main__": 
   print(f"{__file__} can only be imported.") 
