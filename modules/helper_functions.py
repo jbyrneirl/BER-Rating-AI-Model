@@ -14,6 +14,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import confusion_matrix
 
 from scipy.special import softmax
+from math import floor
 
 """_summary_
 Helper function for use in notebooks
@@ -400,6 +401,45 @@ def feature_reduction_decision_tree(df):
   feature_model = SelectFromModel(model, prefit=True)
 
   return feature_model.transform(X)
+
+def feature_reduction_y_grid(df):
+  X = df.drop(["BerRating", "EnergyRating"], axis='columns')
+  X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating', 'CO2MainSpace', 'MPCDERValue'], axis='columns')
+
+  y1 = df.BerRating
+  y2 = df.EnergyRating
+  y_grid = pd.get_dummies(y2)
+
+  X = pd.get_dummies(X)
+  imp = SimpleImputer(missing_values=np.nan, strategy='mean')  #.43
+  imp.fit(X)
+  X = pd.DataFrame(imp.fit_transform(X), columns = imp.get_feature_names_out())
+
+  scaler = MinMaxScaler()
+  X = pd.DataFrame(scaler.fit_transform(X), columns = imp.get_feature_names_out())
+
+  #res_mod = SelectKBest(f_classif, k=NO_FEATURES_KEPT).set_output(transform="pandas")
+
+  names = set()
+  k_num = floor(NO_FEATURES_KEPT/len(y_grid.columns))
+  res_mod = SelectKBest(f_classif, k=k_num).set_output(transform="pandas")
+
+  for (columnName, columnData) in y_grid.items():
+    #print('Column Name : ', columnName)
+    #print('Column Contents : ', columnData.values)
+    res = res_mod.fit_transform(X, columnData)
+    features = res.columns
+    noFeatures = k_num + 1
+
+    #errorchecking
+    while(len(set(features).difference(names)) < k_num):
+      new_k_best = SelectKBest(f_classif, k=noFeatures).set_output(transform="pandas")
+      res = new_k_best.fit_transform(X, columnData)
+      features = res.columns
+      noFeatures += 1
+    names.update(res.columns) 
+  
+  return X[list(names)]
 
 
 
