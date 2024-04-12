@@ -16,6 +16,9 @@ from sklearn.metrics import confusion_matrix
 from scipy.special import softmax
 from math import floor
 
+import seaborn as sb
+import matplotlib.pyplot as plt
+
 """_summary_
 Helper function for use in notebooks
 
@@ -501,6 +504,15 @@ def softmax(X, y, model):
   model.fit(X , y)
   print(y_grid.head())
   return
+
+def heatmap(cm):
+  labels = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "D1", "D2", "E1", "E2", "F", "G"]
+  cm_df =  pd.DataFrame(cm, labels, labels)
+  plt.figure(figsize=(12, 10))
+
+  sb.heatmap(cm_df, annot=True, fmt=f".0f", cmap="Blues")
+
+  plt.show()
 
 if __name__=="__main__": 
   print(f"{__file__} can only be imported.") 
