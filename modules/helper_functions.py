@@ -418,6 +418,8 @@ def feature_reduction_y_grid(df):
   scaler = MinMaxScaler()
   X = pd.DataFrame(scaler.fit_transform(X), columns = imp.get_feature_names_out())
 
+  X_copy = X.copy()
+
   #res_mod = SelectKBest(f_classif, k=NO_FEATURES_KEPT).set_output(transform="pandas")
 
   names = set()
@@ -427,16 +429,21 @@ def feature_reduction_y_grid(df):
   for (columnName, columnData) in y_grid.items():
     #print('Column Name : ', columnName)
     #print('Column Contents : ', columnData.values)
-    res = res_mod.fit_transform(X, columnData)
+    
+    res = res_mod.fit_transform(X_copy, columnData)
     features = res.columns
-    noFeatures = k_num + 1
+    #print("Is Subset: ", set(res.columns).issubset(X.columns))
+
+    X_copy = X_copy.drop(features, axis='columns')
+
+    """ noFeatures = k_num + 1
 
     #errorchecking
-    while(len(set(features).difference(names)) < k_num):
+    while(len(names.difference(set(features))) < k_num):
       new_k_best = SelectKBest(f_classif, k=noFeatures).set_output(transform="pandas")
       res = new_k_best.fit_transform(X, columnData)
       features = res.columns
-      noFeatures += 1
+      noFeatures += 1 """
     names.update(res.columns) 
   
   return X[list(names)]
