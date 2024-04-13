@@ -519,9 +519,18 @@ def softmax(X, y, model):
 def heatmap(cm):
   labels = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "D1", "D2", "E1", "E2", "F", "G"]
   cm_df =  pd.DataFrame(cm, labels, labels)
-  plt.figure(figsize=(12, 10))
+  cm_percent =  cm_df.copy().apply(lambda x: x/x.sum(), axis=1)
 
-  sb.heatmap(cm_df, annot=True, fmt=f".0f", cmap="Blues")
+  plt.figure(figsize=(6, 5))
+  ax = sb.heatmap(cm_percent, annot=cm_df, fmt=f".0f", cmap="Blues", cbar=False, vmin=0, vmax=1)
+  ax.set(xlabel="Predicted Category", ylabel="True Category")
+
+  #cbar = ax.figure.colorbar(ax.collections[0])
+  cbar = ax.figure.colorbar(ax.collections[0])
+  cbar.set_ticks([0, 1])
+  cbar.set_ticklabels(["0%", "100%"])
+
+  
 
   plt.show()
 
