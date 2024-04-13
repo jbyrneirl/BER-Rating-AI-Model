@@ -14,6 +14,10 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import confusion_matrix
 
 from scipy.special import softmax
+from math import floor
+
+import seaborn as sb
+import matplotlib.pyplot as plt
 
 """_summary_
 Helper function for use in notebooks
@@ -412,6 +416,52 @@ def feature_reduction_decision_tree(df):
 
   return feature_model.transform(X)
 
+def feature_reduction_y_grid(df):
+  X = df.drop(["BerRating", "EnergyRating"], axis='columns')
+  X = X.drop(['CPC', 'EPC', 'RER', 'RenewEPnren', 'RenewEPren', 'SA_Code', 'PurposeOfRating', 'HESSchemeUpgrade', 'DateOfAssessment', 'CO2Rating', 'CO2MainSpace', 'MPCDERValue'], axis='columns')
+
+  y1 = df.BerRating
+  y2 = df.EnergyRating
+  y_grid = pd.get_dummies(y2)
+
+  X = pd.get_dummies(X)
+  imp = SimpleImputer(missing_values=np.nan, strategy='mean')  #.43
+  imp.fit(X)
+  X = pd.DataFrame(imp.fit_transform(X), columns = imp.get_feature_names_out())
+
+  scaler = MinMaxScaler()
+  X = pd.DataFrame(scaler.fit_transform(X), columns = imp.get_feature_names_out())
+
+  X_copy = X.copy()
+
+  #res_mod = SelectKBest(f_classif, k=NO_FEATURES_KEPT).set_output(transform="pandas")
+
+  names = set()
+  k_num = floor(NO_FEATURES_KEPT/len(y_grid.columns))
+  res_mod = SelectKBest(f_classif, k=k_num).set_output(transform="pandas")
+
+  for (columnName, columnData) in y_grid.items():
+    #print('Column Name : ', columnName)
+    #print('Column Contents : ', columnData.values)
+    
+    res = res_mod.fit_transform(X_copy, columnData)
+    features = res.columns
+    #print("Is Subset: ", set(res.columns).issubset(X.columns))
+
+    X_copy = X_copy.drop(features, axis='columns')
+
+    """ noFeatures = k_num + 1
+
+    #errorchecking
+    while(len(names.difference(set(features))) < k_num):
+      new_k_best = SelectKBest(f_classif, k=noFeatures).set_output(transform="pandas")
+      res = new_k_best.fit_transform(X, columnData)
+      features = res.columns
+      noFeatures += 1 """
+    names.update(res.columns) 
+  
+  return X[list(names)]
+
 
 
 def rating_feature_conversion(ber_feature_numpy):
@@ -465,6 +515,15 @@ def softmax(X, y, model):
   model.fit(X , y)
   print(y_grid.head())
   return
+
+def heatmap(cm):
+  labels = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "D1", "D2", "E1", "E2", "F", "G"]
+  cm_df =  pd.DataFrame(cm, labels, labels)
+  plt.figure(figsize=(12, 10))
+
+  sb.heatmap(cm_df, annot=True, fmt=f".0f", cmap="Blues")
+
+  plt.show()
 
 if __name__=="__main__": 
   print(f"{__file__} can only be imported.") 
