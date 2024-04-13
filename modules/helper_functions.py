@@ -511,7 +511,7 @@ def heatmap(cm):
   cm_percent =  cm_df.copy().apply(lambda x: x/x.sum(), axis=1)
 
   plt.figure(figsize=(6, 5))
-  ax = sb.heatmap(cm_percent, annot=cm_df, fmt=f".0f", cmap="Blues", cbar=False)
+  ax = sb.heatmap(cm_percent, annot=cm_df, fmt=f".0f", cmap="Blues", cbar=False, vmin=0, vmax=1)
   ax.set(xlabel="Predicted Category", ylabel="True Category")
 
   #cbar = ax.figure.colorbar(ax.collections[0])
