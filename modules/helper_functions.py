@@ -521,7 +521,7 @@ def heatmap(cm):
   cm_df =  pd.DataFrame(cm, labels, labels)
   cm_percent =  cm_df.copy().apply(lambda x: x/x.sum(), axis=1)
 
-  plt.figure(figsize=(6, 5))
+  plt.figure(figsize=(12, 10))
   ax = sb.heatmap(cm_percent, annot=cm_df, fmt=f".0f", cmap="Blues", cbar=False, vmin=0, vmax=1)
   ax.set(xlabel="Predicted Category", ylabel="True Category")
 
