@@ -162,3 +162,7 @@ cython_debug/
 
 # Visual Code
 .vscode
+
+#Google Drive
+.tmp.drivedownload/
+.tmp.driveupload/
